@@ -208,7 +208,7 @@ section {
   height: auto;
   background-color: #c7d9ff;
   color: #09025f;
-  width: 40vw;
+  width: 39vw;
 }
 .hidden {
   display: none;
