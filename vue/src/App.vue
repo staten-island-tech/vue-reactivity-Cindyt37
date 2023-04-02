@@ -185,16 +185,16 @@ h2 {
   display: flex;
   flex-direction: column;
   margin-left: 20px;
-  width: 12vw;
+  width: 12.7vw;
 }
 #user-inputs {
-  width: 55vw;
+  width: 57vw;
 }
 #drink-choices{
   display: flex;
   flex-wrap: wrap-reverse;
   flex-direction: row;
-  width: 55vw;
+  width: 57vw;
 }
 section {
   display: flex;
