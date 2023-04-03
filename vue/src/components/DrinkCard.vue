@@ -1,20 +1,22 @@
 <template>
-    <div class="choice">
-        <button class="drink" @click="$emit('addDrinkList')"> {{ drink }}. . . . ${{ price }}</button>
-        <img class="image" :src="drinkImage">
-        <h1 class="description">{{ description }}</h1>
-    </div>
+  <div class="choice">
+    <button class="drink" @click="$emit('addDrinkList')">
+      {{ drink }}. . . . ${{ price }}
+    </button>
+    <img class="image" :src="drinkImage" />
+    <h1 class="description">{{ description }}</h1>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "Card",
-    props: {
-        drink: String,
-        price: Number,
-        drinkImage: String,
-        description: String,
-    }
+  name: "Card",
+  props: {
+    drink: String,
+    price: Number,
+    drinkImage: String,
+    description: String,
+  },
 };
 </script>
 
@@ -25,7 +27,7 @@ export default {
   display: block;
 }
 .description {
-  font-size: 10px;
+  font-size: 12px;
   align-content: center;
 }
 .choice {
