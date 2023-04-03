@@ -5,43 +5,44 @@
 
       <h1 id="title">MILK TEA PLUS TWO:</h1>
       <h2>Click On Drink Name to Add To Cart</h2>
-
-      <div id="choices-section">
-        <div id="drink-choices">
-          <div class="choice" v-for="(drinkChoice, index) in drinkChoices" :key="index">
-            <button @click="addDrinkList(index)"> {{ drinkChoice.drink }}. . . . ${{ drinkChoice.price }}</button>
-            <img class="image" :src="drinkChoice.drinkImage">
-            <h1 class="description">{{ drinkChoice.description }}</h1>
-          </div>
-        </div>
+      <div class="drink-choices">
+        <Card 
+        class="choice" 
+        v-for="(drinkChoice, index) in drinkChoices"
+        @addDrinkList="addDrinkList(index)" 
+        :key="index"
+        :drink="drinkChoice.drink"
+        :drinkImage="drinkChoice.drinkImage"
+        :description="drinkChoice.description"
+        :price="drinkChoice.price"/>
       </div>
-
     </section>
 
     <section id="order-list">
-      <h2>Your Order:</h2>
-      <div id="orderInfo">
-        <ul class="list">
-          <li class="info" v-for="order in order" :key="order">{{ order }}</li>  
-        </ul>
-        <ul class="list">
-          <li class="info" v-for="price in orderPrice" :key="price">${{ price }}</li>  
-        </ul>
-      </div>
+      <h1>Your Order:</h1>
+      <Cart
+      class="cart"
+      v-for="(drinkChoice, index) in order"
+      :key="(index)"
+      :order="drinkChoice.drink"
+      :price="drinkChoice.price"
+      />
       <h3>Subtotal: ${{ subtotal }}</h3>
-      <button class="delete-btn" @click="removeLastItem()">Delete previous drink.</button>
-      <button class="delete-btn" @click="removeAllItems()">Delete all drinks.</button>
+      <button class="delete-btn" @click="removeLastItem()">Delete Last Drink</button>
+      <button class="delete-btn" @click="removeAllItems()">Delete All Drinks</button>
     </section>
-
   </div>
 
 </template>
 
 <script>
+import Card from "./components/DrinkCard.vue";
+import Cart from "./components/DrinkCart.vue"
 export default {
   drink: 'App',
   components: {
-    
+    Card,
+    Cart,
   },
   data() {
     return {
@@ -129,14 +130,9 @@ export default {
   },
   methods: {
     addDrinkList(index) {
-      this.order.push(this.drinkChoices[index].drink)
+      this.order.push(this.drinkChoices[index])
       this.orderPrice.push(this.drinkChoices[index].price)
       this.subtotal = this.subtotal + this.drinkChoices[index].price
-    },
-    removeDrink(index) {
-      this.order.pop(this.drinkChoices[index].drink)
-      this.orderPrice.pop(this.drinkChoices[index].price)
-      this.subtotal = this.subtotal - this.drinkChoices[index].price
     },
     removeLastItem(){
       if (this.order.length !== 0) {
@@ -151,7 +147,7 @@ export default {
       this.subtotal = 0
     }
   },
-} 
+}
 </script>
 
 <style lang="css">
@@ -170,31 +166,13 @@ h2 {
   flex-direction: row;
   background-color: #948df5;
 }
-.image {
-  height: 10rem;
-  width: 100%;
-  object-fit: cover;
-  display: block;
-}
-.description {
-  font-size: 10px;
-  width: 100%;
-  align-content: center;
-}
-.choice {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-  width: 12.7vw;
-}
 #user-inputs {
   width: 57vw;
 }
-#drink-choices{
+.drink-choices{
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   flex-direction: row;
-  width: 57vw;
 }
 section {
   display: flex;
@@ -209,18 +187,6 @@ section {
   background-color: #c7d9ff;
   color: #09025f;
   width: 39vw;
-}
-.hidden {
-  display: none;
-}
-.list {
-  list-style: none;
-}
-#orderInfo {
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 }
 .delete-btn {
   margin-bottom: 1rem;
