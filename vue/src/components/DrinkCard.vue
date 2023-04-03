@@ -3,7 +3,7 @@
     <button class="drink" @click="$emit('addDrinkList')">
       {{ drink }}. . . . ${{ price }}
     </button>
-    <img class="image" :src="drinkImage" />
+    <img class="image" :src="drinkImage" :alt="description[0]" />
     <h1 class="description">{{ description }}</h1>
   </div>
 </template>
